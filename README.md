@@ -41,7 +41,7 @@ Because we are dynamically changing the value attribute of this input element, t
 
 ## The javascript
 
-I used the jQuery .ready function to wait until the page loads, then used plain old javascript to select the input element, and target the value attribute. Insert the following line of code in a <script> tag at the bottom of the login.liquid page.
+I used the jQuery .ready function to wait until the page loads, then used plain old javascript to select the input element, and target the value attribute. Insert the following line of code in a script tag at the bottom of the login.liquid page.
 
 	/* Once the page loads, select the elmement with the id of 'urlRedirect' and change the value to the value of the 'url' key in the address bar */
   
@@ -49,18 +49,22 @@ I used the jQuery .ready function to wait until the page loads, then used plain 
 		document.getElementById("urlRedirect").value=getQueryVariable("url");
 	});
 	
-You can see that the block of code above calls the function, "getQueryVariable" and passes the string, "url", which identifies the key for the key-value pair we are looking for in the url. The function getQueryVariable was written by Chris Coyier and is from this [post](http://css-tricks.com/snippets/javascript/get-url-variables/) on his CSS-tricks.com website.
-	
+You can see that the block of code above calls the function, "getQueryVariable" and passes the string, "url", which identifies the key for the key-value pair we are looking for in the url. The function [getQueryVariable](http://css-tricks.com/snippets/javascript/get-url-variables/) was written by Chris Coyier and is from [CSS-tricks.com](http://css-tricks.com):
+
 	/* Get parameters from url for redirect back to where user came from */
 	/* From http://css-tricks.com/snippets/javascript/get-url-variables/ */
-  function getQueryVariable(variable)
-  {
-         var query = window.location.search.substring(1);
-         var vars = query.split("&");
-         for (var i=0;i<vars.length;i++) {
-                 var pair = vars[i].split("=");
-                 if(pair[0] == variable){return pair[1];}
-         }
-         return("/collections/all");
-  }
+	function getQueryVariable(variable)
+	{
+	        var query = window.location.search.substring(1);
+	        var vars = query.split("&");
+	        for (var i=0;i<vars.length;i++) {
+	        	var pair = vars[i].split("=");
+	        	if(pair[0] == variable){return pair[1];}
+	        }
+	        return("/collections/all");
+ 	}
+ 	
+If successful, this code returns the product page url, which is takes from what we added to the login page url. This product url is returned to the value attribute of the input element, allowing for a customized and successful redirect after login, back to where the user was browsing before they were required to login.
+
+This concludes the dynamic redirect. Please let me know if there are any discrepancies in this tutorial, how I can make it better, or how it worked for you.
 
